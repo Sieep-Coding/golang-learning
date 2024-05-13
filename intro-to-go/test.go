@@ -1,7 +1,10 @@
-package main
+package test
 
-import "fmt"
+import (
+	"fmt"
+)
 
-func main() {
-	fmt.Println("Hello!")
+func Hello(name string) string {
+	message := fmt.Sprintf("Hi, %v. Welcome!", name)
+	return message
 }
