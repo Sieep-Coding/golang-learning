@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func SumInts(m map[string]int64) int64 {
 	var s int64
@@ -26,6 +28,18 @@ func SumIntsOrFloats[K comparable, V int64 | float64](m map[K]V) V {
 	return s
 }
 
+func SumNumbers[K comparable, V Number](m map[K]V) V {
+	var s V
+	for _, v := range m {
+		s += v
+	}
+	return s
+}
+
+type Number interface {
+	int64 | float64
+}
+
 func main() {
 	// Initialize a map for the integer values
 	ints := map[string]int64{
@@ -46,4 +60,8 @@ func main() {
 	fmt.Printf("Generic Sums: %v and %v\n",
 		SumIntsOrFloats[string, int64](ints),
 		SumIntsOrFloats[string, float64](floats))
+
+	fmt.Printf("Generic Sums with Constraint: %v and %v\n",
+		SumNumbers(ints),
+		SumNumbers(floats))
 }
